@@ -11,93 +11,90 @@ document.addEventListener('DOMContentLoaded', function() {
       particle.style.borderRadius = '50%';
       particle.style.boxShadow = `0 0 ${Math.random() * 10 + 5}px ${particle.style.backgroundColor}`;
       
-      const startX = Math.random() * window.innerWidth;
-      const startY = Math.random() * window.innerHeight;
-      
-      particle.style.left = startX + 'px';
-      particle.style.top = startY + 'px';
+      // Position initiale aléatoire
+      particle.style.left = Math.random() * 100 + 'vw';
+      particle.style.top = Math.random() * 100 + 'vh';
       
       container.appendChild(particle);
       
+      // Animation
+      const duration = Math.random() * 10000 + 5000;
       const angle = Math.random() * Math.PI * 2;
-      const speed = Math.random() * 2 + 1;
-      const life = Math.random() * 5000 + 3000;
+      const speed = Math.random() * 0.5 + 0.1;
       
-      let opacity = 1;
-      const fadeOut = setInterval(() => {
-          opacity -= 0.01;
-          particle.style.opacity = opacity;
+      const startTime = Date.now();
+      
+      function animate() {
+          const elapsed = Date.now() - startTime;
+          const progress = elapsed / duration;
           
-          if (opacity <= 0) {
-              clearInterval(fadeOut);
+          if (progress > 1) {
               particle.remove();
               createParticle();
+              return;
           }
-      }, life / 100);
+          
+          const x = parseFloat(particle.style.left) + Math.cos(angle) * speed;
+          const y = parseFloat(particle.style.top) + Math.sin(angle) * speed;
+          
+          particle.style.left = x + 'vw';
+          particle.style.top = y + 'vh';
+          particle.style.opacity = 1 - progress;
+          
+          requestAnimationFrame(animate);
+      }
       
-      const move = setInterval(() => {
-          const currentX = parseFloat(particle.style.left);
-          const currentY = parseFloat(particle.style.top);
-          
-          particle.style.left = (currentX + Math.cos(angle) * speed) + 'px';
-          particle.style.top = (currentY + Math.sin(angle) * speed) + 'px';
-          
-          if (currentX < -10 || currentX > window.innerWidth + 10 || 
-              currentY < -10 || currentY > window.innerHeight + 10) {
-              clearInterval(move);
-              particle.remove();
-              createParticle();
-          }
-      }, 30);
+      requestAnimationFrame(animate);
   }
   
-  for (let i = 0; i < 100; i++) {
+  // Créer 50 particules initiales
+  for (let i = 0; i < 50; i++) {
       createParticle();
   }
   
-  // Effet de clic pour ajouter des étoiles
+  // Effet spécial au clic
   document.addEventListener('click', function(e) {
       for (let i = 0; i < 10; i++) {
-          setTimeout(() => {
-              const star = document.createElement('div');
-              star.style.position = 'absolute';
-              star.style.left = e.clientX + 'px';
-              star.style.top = e.clientY + 'px';
-              star.style.width = '10px';
-              star.style.height = '10px';
-              star.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-              star.style.borderRadius = '50%';
-              star.style.boxShadow = `0 0 15px ${star.style.backgroundColor}`;
-              star.style.transform = 'translate(-50%, -50%)';
-              star.style.zIndex = '15';
+          const star = document.createElement('div');
+          star.style.position = 'fixed';
+          star.style.left = e.clientX + 'px';
+          star.style.top = e.clientY + 'px';
+          star.style.width = '10px';
+          star.style.height = '10px';
+          star.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+          star.style.borderRadius = '50%';
+          star.style.boxShadow = `0 0 15px ${star.style.backgroundColor}`;
+          star.style.transform = 'translate(-50%, -50%)';
+          star.style.zIndex = '15';
+          
+          document.body.appendChild(star);
+          
+          const angle = Math.random() * Math.PI * 2;
+          const distance = Math.random() * 100 + 50;
+          const duration = Math.random() * 1000 + 500;
+          
+          const startTime = Date.now();
+          
+          function animateStar() {
+              const elapsed = Date.now() - startTime;
+              const progress = elapsed / duration;
               
-              document.body.appendChild(star);
+              if (progress >= 1) {
+                  star.remove();
+                  return;
+              }
               
-              const angle = Math.random() * Math.PI * 2;
-              const distance = Math.random() * 100 + 50;
-              const duration = Math.random() * 1000 + 500;
+              const x = e.clientX + Math.cos(angle) * distance * progress;
+              const y = e.clientY + Math.sin(angle) * distance * progress;
               
-              const startTime = Date.now();
+              star.style.left = x + 'px';
+              star.style.top = y + 'px';
+              star.style.opacity = 1 - progress;
               
-              const animate = () => {
-                  const elapsed = Date.now() - startTime;
-                  const progress = elapsed / duration;
-                  
-                  if (progress >= 1) {
-                      star.remove();
-                      return;
-                  }
-                  
-                  const currentDistance = distance * progress;
-                  star.style.left = e.clientX + Math.cos(angle) * currentDistance + 'px';
-                  star.style.top = e.clientY + Math.sin(angle) * currentDistance + 'px';
-                  star.style.opacity = 1 - progress;
-                  
-                  requestAnimationFrame(animate);
-              };
-              
-              requestAnimationFrame(animate);
-          }, i * 100);
+              requestAnimationFrame(animateStar);
+          }
+          
+          requestAnimationFrame(animateStar);
       }
   });
 });
