@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
 
 body {
   margin: 0;
@@ -9,7 +9,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Great Vibes', cursive;
   overflow: hidden;
   position: relative;
 }
@@ -19,41 +18,18 @@ body {
   z-index: 2;
 }
 
-.heart {
-  position: relative;
-  width: 120px;
-  height: 110px;
-  margin: 0 auto 30px;
-  background: linear-gradient(45deg, #ffd700, #ffcc00, #ffea00);
+.emoji-heart {
+  font-size: 8rem;
   animation: beat 1s infinite;
-  transform: rotate(-45deg);
-  box-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 215, 0, 0.5);
-}
-
-.heart::before,
-.heart::after {
-  content: "";
-  position: absolute;
-  width: 120px;
-  height: 110px;
-  background: inherit;
-  border-radius: 50%;
-}
-
-.heart::before {
-  top: -60px;
-  left: 0;
-}
-
-.heart::after {
-  left: 60px;
-  top: 0;
+  text-shadow: 0 0 20px #ffd700, 0 0 40px #ffcc00;
+  margin-bottom: 20px;
 }
 
 .message {
+  font-family: 'Parisienne', cursive;
+  font-size: 2.8rem;
   color: #fff8dc;
-  font-size: 2.2em;
-  text-shadow: 0 0 10px #ffd700, 0 0 20px #ffcc00;
+  text-shadow: 0 0 10px #ffd700, 0 0 30px #ffcc00;
   animation: glow 2s ease-in-out infinite alternate;
 }
 
@@ -69,19 +45,19 @@ body {
 
 @keyframes beat {
   0%, 100% {
-    transform: scale(1) rotate(-45deg);
+    transform: scale(1);
   }
   50% {
-    transform: scale(1.1) rotate(-45deg);
+    transform: scale(1.15);
   }
 }
 
 @keyframes glow {
   from {
-    text-shadow: 0 0 10px #ffd700, 0 0 20px #ffcc00;
+    text-shadow: 0 0 10px #ffd700, 0 0 30px #ffcc00;
   }
   to {
-    text-shadow: 0 0 20px #ffea00, 0 0 30px #ffff99;
+    text-shadow: 0 0 20px #ffff66, 0 0 40px #ffeeaa;
   }
 }
 
