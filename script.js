@@ -1,6 +1,6 @@
-// Un petit effet bonus : un texte qui s'écrit lettre par lettre 💌
+// Effet lettre par lettre 💌
 
-const msg = "Je t'aime, IDA JOSE MARIE MONTEIRO 💘";
+const msg = "Je t'aime, IDA JOSE MARIE MONTEIRO 💛";
 const messageEl = document.querySelector(".message");
 let index = 0;
 
