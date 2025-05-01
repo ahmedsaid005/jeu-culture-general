@@ -1,113 +1,72 @@
-body, html {
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+body {
   margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  background: #0a0a1a;
-  overflow: hidden;
-  font-family: 'Arial', sans-serif;
+  height: 100vh;
+  background: radial-gradient(circle, #1f1c2c, #928dab);
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Great Vibes', cursive;
+  overflow: hidden;
 }
 
-.heart-container {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.container {
+  text-align: center;
 }
 
 .heart {
   position: relative;
-  width: 150px;
-  height: 150px;
-  background: linear-gradient(45deg, #ff00cc, #3333ff);
-  transform: rotate(45deg);
-  box-shadow: 0 0 50px #ff00cc;
-  animation: heartbeat 1.5s ease infinite;
-  margin-bottom: 50px;
+  width: 100px;
+  height: 90px;
+  margin: 0 auto 20px;
+  background: linear-gradient(45deg, #ff4ecd, #00ffe7);
+  animation: beat 1s infinite;
+  transform: rotate(-45deg);
+  box-shadow: 0 0 30px rgba(255, 78, 205, 0.7);
 }
 
 .heart::before,
 .heart::after {
-  content: '';
+  content: "";
   position: absolute;
-  width: 150px;
-  height: 150px;
-  background: linear-gradient(45deg, #ff00cc, #3333ff);
+  width: 100px;
+  height: 90px;
+  background: inherit;
   border-radius: 50%;
 }
 
 .heart::before {
-  top: -75px;
+  top: -50px;
   left: 0;
 }
 
 .heart::after {
+  left: 50px;
   top: 0;
-  left: -75px;
-}
-
-.heart-pulse {
-  position: absolute;
-  width: 150px;
-  height: 150px;
-  border: 2px solid rgba(255, 0, 204, 0.5);
-  border-radius: 50%;
-  transform: rotate(45deg);
-  animation: pulse 2s ease-out infinite;
-}
-
-.name {
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: 0 0 10px #ff00cc;
-  margin-top: 40px;
-  animation: glow 2s ease-in-out infinite alternate;
 }
 
 .message {
-  color: white;
-  font-size: 18px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-top: 20px;
-  animation: glow 2s ease-in-out infinite alternate-reverse;
+  color: #ffffff;
+  font-size: 2em;
+  text-shadow: 0 0 10px #ff4ecd;
+  animation: glow 2s ease-in-out infinite alternate;
 }
 
-.particles {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
-}
-
-@keyframes heartbeat {
-  0% { transform: rotate(45deg) scale(1); }
-  25% { transform: rotate(45deg) scale(1.1); }
-  30% { transform: rotate(45deg) scale(1.1); }
-  50% { transform: rotate(45deg) scale(1); }
-  60% { transform: rotate(45deg) scale(1.1); }
-  100% { transform: rotate(45deg) scale(1); }
-}
-
-@keyframes pulse {
-  0% { transform: rotate(45deg) scale(0.8); opacity: 0.7; }
-  70% { transform: rotate(45deg) scale(1.5); opacity: 0; }
-  100% { transform: rotate(45deg) scale(1.5); opacity: 0; }
+@keyframes beat {
+  0%, 100% {
+    transform: scale(1) rotate(-45deg);
+  }
+  50% {
+    transform: scale(1.1) rotate(-45deg);
+  }
 }
 
 @keyframes glow {
-  from { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ff00cc; }
-  to { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff00cc; }
+  from {
+    text-shadow: 0 0 10px #ff4ecd, 0 0 20px #ff4ecd;
+  }
+  to {
+    text-shadow: 0 0 20px #00ffe7, 0 0 30px #00ffe7;
+  }
 }
